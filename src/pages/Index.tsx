@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -118,36 +119,37 @@ const Home: React.FC = () => {
               An interactive journey through my design process, showcasing the evolution of concepts into impactful solutions.
             </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <InteractiveButton
-              asChild
-              size="lg"
-              className="bg-portfolio-purple hover:bg-portfolio-purple/90 text-white"
-            >
-              <Link to="/projects">
-                View Projects
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </InteractiveButton>
-            <InteractiveButton
-              asChild
-              size="lg"
-              variant="outline"
-            >
-              <Link to="/process">Explore Design Process</Link>
-            </InteractiveButton>
-          </div>
-        </motion.div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <InteractiveButton
+                asChild
+                size="lg"
+                className="bg-portfolio-purple hover:bg-portfolio-purple/90 text-white"
+              >
+                <Link to="/projects">
+                  View Projects
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </InteractiveButton>
+              <InteractiveButton
+                asChild
+                size="lg"
+                variant="outline"
+              >
+                <Link to="/process">Explore Design Process</Link>
+              </InteractiveButton>
+            </div>
+          </motion.div>
 
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          onClick={handleScrollDown}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-        >
-          <ChevronDown className="h-6 w-6 text-muted-foreground" />
+          <motion.div
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+            onClick={handleScrollDown}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <ChevronDown className="h-6 w-6 text-muted-foreground" />
+          </motion.div>
         </motion.div>
       </motion.section>
 
