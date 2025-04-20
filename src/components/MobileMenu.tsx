@@ -67,7 +67,6 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
             <div className="pt-20 px-6 flex flex-col space-y-6 h-full">
               <NavLink to="/" label="Home" onClick={onClose} variants={linkVariants} />
               <NavLink to="/projects" label="Projects" onClick={onClose} variants={linkVariants} />
-              <NavLink to="/process" label="Process" onClick={onClose} variants={linkVariants} />
               <NavLink to="/about" label="About" onClick={onClose} variants={linkVariants} />
               <NavLink to="/contact" label="Contact" onClick={onClose} variants={linkVariants} />
               
@@ -75,8 +74,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
                 className="mt-auto mb-10 text-sm text-muted-foreground"
                 variants={linkVariants}
               >
-                <p>© 2025 Design Journal</p>
-                <p>An interactive portfolio showcasing design evolution</p>
+                <p>© 2025 Aryan Bansal</p>
+                <p>CSD Student at IIIT Delhi</p>
               </motion.div>
             </div>
           </motion.div>
@@ -91,7 +90,7 @@ const NavLink: React.FC<{ to: string; label: string; onClick: () => void; varian
     <motion.div variants={variants}>
       <Link
         to={to}
-        className="block text-2xl font-serif font-medium py-2 hover:text-portfolio-purple transition-colors duration-200"
+        className="block text-2xl font-display font-medium py-2 hover:text-primary transition-colors duration-200"
         onClick={onClick}
       >
         {label}

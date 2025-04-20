@@ -17,22 +17,22 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div>
             <Link to="/" className="flex items-center space-x-2 mb-4">
-              <div className="h-8 w-8 bg-portfolio-purple rounded-full flex items-center justify-center">
-                <span className="font-serif text-white font-bold text-lg">D</span>
+              <div className="h-8 w-8 bg-primary rounded-full flex items-center justify-center">
+                <span className="font-display text-white font-bold text-lg">A</span>
               </div>
-              <span className="font-serif text-xl font-bold">
-                Design<span className="text-portfolio-purple">Journal</span>
+              <span className="font-display text-xl font-bold">
+                Aryan<span className="text-primary">Bansal</span>
               </span>
             </Link>
             <p className="text-muted-foreground text-sm mb-6">
-              An interactive portfolio showcasing my design process, experiences, and 
-              evolution over time.
+              CSD Student at IIIT Delhi, passionate about creating innovative solutions and exploring 
+              new technologies.
             </p>
             <div className="flex space-x-4">
               <SocialIcon href="https://github.com" icon={<Github size={18} />} />
               <SocialIcon href="https://linkedin.com" icon={<Linkedin size={18} />} />
               <SocialIcon href="https://twitter.com" icon={<Twitter size={18} />} />
-              <SocialIcon href="mailto:hello@designjournal.com" icon={<Mail size={18} />} />
+              <SocialIcon href="mailto:hello@aryanbansal.com" icon={<Mail size={18} />} />
             </div>
           </div>
           
@@ -46,9 +46,6 @@ const Footer: React.FC = () => {
                 <FooterLink to="/projects" label="Projects" />
               </li>
               <li>
-                <FooterLink to="/process" label="Design Process" />
-              </li>
-              <li>
                 <FooterLink to="/about" label="About Me" />
               </li>
               <li>
@@ -60,21 +57,21 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="font-semibold mb-4">Get in Touch</h4>
             <p className="text-muted-foreground text-sm mb-4">
-              Have a question or want to work together on a project? Feel free to reach out!
+              Interested in collaborating on a project or have questions about my work? Feel free to reach out!
             </p>
             <a 
-              href="mailto:hello@designjournal.com"
-              className="inline-flex items-center text-sm font-medium text-portfolio-purple hover:text-portfolio-purple/80 transition-colors"
+              href="mailto:aryan@example.com"
+              className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors"
             >
               <Mail size={16} className="mr-2" />
-              hello@designjournal.com
+              aryan@example.com
             </a>
           </div>
         </div>
         
         <div className="border-t mt-12 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground mb-4 md:mb-0">
-            © {new Date().getFullYear()} Design Journal. All rights reserved.
+            © {new Date().getFullYear()} Aryan Bansal. All rights reserved.
           </p>
           <div className="flex space-x-6 text-sm">
             <Link to="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">
@@ -96,7 +93,7 @@ const SocialIcon: React.FC<{ href: string; icon: React.ReactNode }> = ({ href, i
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-foreground hover:bg-portfolio-purple hover:text-white transition-colors"
+      className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-colors"
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
     >

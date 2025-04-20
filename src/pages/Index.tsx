@@ -7,32 +7,45 @@ import Layout from "@/components/Layout";
 import ProjectCard from "@/components/ProjectCard";
 import { setupScrollObserver } from "@/utils/scrollUtils";
 import InteractiveButton from "@/components/InteractiveButton";
+import LiquidBlob from "@/components/LiquidBlob";
 
 // Sample projects data (in a real app, this would come from a database or API)
 const projectsData = [
   {
-    id: "interactive-dashboard",
-    title: "Interactive Dashboard",
-    description: "A responsive dashboard with data visualization and real-time updates.",
-    imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGFzaGJvYXJkfGVufDB8fDB8fHww",
-    category: "UI/UX Design",
-    date: "March 2025"
+    id: "stick-hero",
+    title: "Stick Hero Game",
+    description: "Developed an interactive game using JavaFX, blending engaging gameplay with dynamic animations and user-friendly controls.",
+    imageUrl: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGdhbWV8ZW58MHx8MHx8fDA%3D",
+    category: "Game Development",
+    date: "2023",
+    technologies: "Java, JavaFX, Scene Builder, Eclipse/IntelliJ, Git"
   },
   {
-    id: "mobile-app-redesign",
-    title: "Mobile App Redesign",
-    description: "Reimagining a fitness app with improved user flows and accessibility.",
-    imageUrl: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8bW9iaWxlJTIwYXBwfGVufDB8fDB8fHww",
-    category: "Mobile Design",
-    date: "February 2025"
+    id: "retail-management",
+    title: "Retail Store Management System",
+    description: "Created a comprehensive retail store management system from scratch to improve overall efficiency and streamline day-to-day operations.",
+    imageUrl: "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmV0YWlsJTIwc3RvcmV8ZW58MHx8MHx8fDA%3D",
+    category: "Software Development",
+    date: "2024",
+    technologies: "Python, MySQL, Eclipse/IntelliJ, Git"
   },
   {
-    id: "brand-identity",
-    title: "Brand Identity System",
-    description: "Creating a comprehensive visual language for a sustainable fashion brand.",
-    imageUrl: "https://images.unsplash.com/photo-1599422314077-f4dfdaa4cd09?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGJyYW5kaW5nfGVufDB8fDB8fHww",
-    category: "Branding",
-    date: "January 2025"
+    id: "spotify-clone",
+    title: "Spotify Clone Website",
+    description: "Integrated a dynamic album system in the Spotify Clone website for seamless organization.",
+    imageUrl: "https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3BvdGlmeXxlbnwwfHwwfHx8MA%3D%3D",
+    category: "Web Development",
+    date: "2023",
+    technologies: "HTML, CSS, JavaScript, Eclipse/IntelliJ, Git"
+  },
+  {
+    id: "zoo-management",
+    title: "Zoo Management System",
+    description: "Developed a Java-based Zoo Management System that simplifies the administration of the zoo by facilitating tasks such as ticket issuance for visitors and resource management for zookeepers.",
+    imageUrl: "https://images.unsplash.com/photo-1618035881605-dfe7bfa97c3d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHpvb3xlbnwwfHwwfHx8MA%3D%3D",
+    category: "Software Development",
+    date: "2023",
+    technologies: "Java, Eclipse/IntelliJ, Git"
   }
 ];
 
@@ -84,12 +97,13 @@ const Home: React.FC = () => {
         style={{ perspective: 1000 }}
       >
         <div className="absolute inset-0 overflow-hidden">
+          <LiquidBlob />
           <motion.div 
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px]"
             style={{ rotateX, rotateY }}
           >
             <motion.div
-              className="absolute inset-0 rounded-full bg-portfolio-purple/5 blur-3xl"
+              className="absolute inset-0 rounded-full bg-primary/5 blur-3xl"
               animate={{
                 scale: [1, 1.2, 1],
               }}
@@ -112,18 +126,18 @@ const Home: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="max-w-3xl mx-auto text-center"
           >
-            <h1 className="text-4xl md:text-6xl font-serif font-bold mb-6">
-              Crafting <span className="text-gradient">meaningful</span> design experiences
+            <h1 className="text-4xl md:text-6xl font-display font-bold mb-6">
+              Crafting <span className="text-gradient">innovative</span> software solutions
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-8">
-              An interactive journey through my design process, showcasing the evolution of concepts into impactful solutions.
+              B.Tech CSD student at IIIT Delhi, passionate about creating impactful tech solutions and exploring new technologies.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <InteractiveButton
                 asChild
                 size="lg"
-                className="bg-portfolio-purple hover:bg-portfolio-purple/90 text-white"
+                className="bg-primary hover:bg-primary/90 text-white"
               >
                 <Link to="/projects">
                   View Projects
@@ -135,7 +149,7 @@ const Home: React.FC = () => {
                 size="lg"
                 variant="outline"
               >
-                <Link to="/process">Explore Design Process</Link>
+                <Link to="/about">About Me</Link>
               </InteractiveButton>
             </div>
           </motion.div>
@@ -158,7 +172,7 @@ const Home: React.FC = () => {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <motion.h2 
-              className="text-3xl font-serif font-bold mb-4 scroll-reveal"
+              className="text-3xl font-display font-bold mb-4 scroll-reveal"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
@@ -173,7 +187,7 @@ const Home: React.FC = () => {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              Explore a selection of my recent design work spanning various disciplines and challenges.
+              Explore a selection of my recent projects spanning various technologies and challenges.
             </motion.p>
           </div>
 
@@ -198,19 +212,19 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Process Overview */}
+      {/* Skills Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <motion.h2 
-                className="text-3xl font-serif font-bold mb-4 scroll-reveal"
+                className="text-3xl font-display font-bold mb-4 scroll-reveal"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.5 }}
               >
-                My Design Process
+                My Technical Skills
               </motion.h2>
               <motion.p 
                 className="text-muted-foreground mb-6 scroll-reveal"
@@ -219,32 +233,28 @@ const Home: React.FC = () => {
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
-                I approach each project with a thoughtful methodology that balances research, creativity, and strategic thinking to deliver meaningful solutions.
+                I've developed a versatile skill set through academic coursework, personal projects, and hands-on experience with different technologies.
               </motion.p>
               
               <div className="space-y-4">
-                <ProcessStep 
-                  number="01" 
-                  title="Discovery & Research" 
-                  description="Understanding the problem space, user needs, and business goals through research and stakeholder interviews."
+                <SkillCategory 
+                  title="Programming Languages" 
+                  skills={["Java", "Python", "JavaScript", "C/C++", "HTML/CSS"]}
                   delay={0.2}
                 />
-                <ProcessStep 
-                  number="02" 
-                  title="Ideation & Concepts" 
-                  description="Exploring multiple directions through sketching, wireframing, and collaborative brainstorming sessions."
+                <SkillCategory 
+                  title="Frameworks & Libraries" 
+                  skills={["JavaFX", "React", "Node.js", "Express", "TensorFlow"]}
                   delay={0.3}
                 />
-                <ProcessStep 
-                  number="03" 
-                  title="Design & Prototyping" 
-                  description="Creating comprehensive design systems and interactive prototypes to visualize the solution."
+                <SkillCategory 
+                  title="Tools & Technologies" 
+                  skills={["Git", "MySQL", "MongoDB", "Docker", "AWS"]}
                   delay={0.4}
                 />
-                <ProcessStep 
-                  number="04" 
-                  title="Testing & Iteration" 
-                  description="Validating designs through user testing and refining based on feedback and insights."
+                <SkillCategory 
+                  title="Soft Skills" 
+                  skills={["Problem Solving", "Team Collaboration", "Project Management", "Critical Thinking"]}
                   delay={0.5}
                 />
               </div>
@@ -261,8 +271,8 @@ const Home: React.FC = () => {
                   variant="outline"
                   className="group"
                 >
-                  <Link to="/process">
-                    Explore Full Process
+                  <Link to="/about">
+                    Learn More About Me
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </InteractiveButton>
@@ -276,12 +286,12 @@ const Home: React.FC = () => {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.7 }}
             >
-              <div className="absolute inset-0 bg-portfolio-purple/10 rounded-full animate-spin-slow"></div>
-              <div className="absolute inset-4 bg-portfolio-teal/10 rounded-full animate-spin-slow" style={{ animationDirection: 'reverse' }}></div>
-              <div className="absolute inset-8 bg-portfolio-accent/10 rounded-full animate-spin-slow" style={{ animationDuration: '12s' }}></div>
+              <div className="absolute inset-0 bg-primary/10 rounded-full animate-spin-slow"></div>
+              <div className="absolute inset-4 bg-accent/10 rounded-full animate-spin-slow" style={{ animationDirection: 'reverse' }}></div>
+              <div className="absolute inset-8 bg-primary/10 rounded-full animate-spin-slow" style={{ animationDuration: '12s' }}></div>
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="bg-background rounded-full h-32 w-32 flex items-center justify-center shadow-lg">
-                  <span className="font-serif text-2xl text-portfolio-purple">Process</span>
+                  <span className="font-display text-2xl text-primary">Skills</span>
                 </div>
               </div>
             </motion.div>
@@ -292,28 +302,29 @@ const Home: React.FC = () => {
   );
 };
 
-const ProcessStep: React.FC<{ 
-  number: string; 
+const SkillCategory: React.FC<{ 
   title: string; 
-  description: string;
+  skills: string[];
   delay: number;
-}> = ({ number, title, description, delay }) => {
+}> = ({ title, skills, delay }) => {
   return (
     <motion.div 
-      className="flex scroll-reveal"
+      className="scroll-reveal"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.5, delay }}
     >
-      <div className="mr-4 flex-shrink-0">
-        <div className="w-10 h-10 rounded-full bg-portfolio-purple/10 flex items-center justify-center">
-          <span className="text-portfolio-purple font-medium">{number}</span>
-        </div>
-      </div>
-      <div>
-        <h3 className="font-medium text-lg mb-1">{title}</h3>
-        <p className="text-muted-foreground text-sm">{description}</p>
+      <h3 className="font-medium text-lg mb-1">{title}</h3>
+      <div className="flex flex-wrap gap-2 mt-2">
+        {skills.map((skill, index) => (
+          <span 
+            key={index}
+            className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-sm font-medium"
+          >
+            {skill}
+          </span>
+        ))}
       </div>
     </motion.div>
   );

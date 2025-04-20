@@ -62,18 +62,11 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				},
-				portfolio: {
-					purple: '#9b87f5',
-					teal: '#20b2aa',
-					dark: '#1A1F2C',
-					light: '#F1F0FB',
-					accent: '#D946EF'
 				}
 			},
 			fontFamily: {
-				sans: ['Inter', 'sans-serif'],
-				serif: ['Playfair Display', 'serif']
+				sans: ['Poppins', 'sans-serif'],
+				display: ['Outfit', 'sans-serif']
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -118,6 +111,11 @@ export default {
 					'50%': { transform: 'rotate(10.0deg)' },
 					'60%': { transform: 'rotate(0.0deg)' },
 					'100%': { transform: 'rotate(0.0deg)' }
+				},
+				'morph': {
+					'0%': { 'border-radius': '60% 40% 30% 70%/60% 30% 70% 40%' },
+					'50%': { 'border-radius': '30% 60% 70% 40%/50% 60% 30% 60%' },
+					'100%': { 'border-radius': '60% 40% 30% 70%/60% 30% 70% 40%' }
 				}
 			},
 			animation: {
@@ -126,7 +124,8 @@ export default {
 				'float': 'float 3s ease-in-out infinite',
 				'spin-slow': 'spin-slow 8s linear infinite',
 				'pulse-soft': 'pulse-soft 2s ease-in-out infinite',
-				'wave': 'wave 2s linear infinite'
+				'wave': 'wave 2s linear infinite',
+				'morph': 'morph 8s ease-in-out infinite'
 			}
 		}
 	},

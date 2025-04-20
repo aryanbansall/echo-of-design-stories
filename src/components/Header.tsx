@@ -41,21 +41,20 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, isMenuOpen }) => {
       <div className="container mx-auto flex justify-between items-center px-4">
         <Link to="/" className="flex items-center space-x-2">
           <motion.div
-            className="h-10 w-10 bg-portfolio-purple rounded-full flex items-center justify-center"
+            className="h-10 w-10 bg-primary rounded-full flex items-center justify-center"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
-            <span className="font-serif text-white font-bold text-xl">D</span>
+            <span className="font-display text-white font-bold text-xl">A</span>
           </motion.div>
-          <span className="font-serif text-xl md:text-2xl font-bold hidden sm:inline-block">
-            Design<span className="text-portfolio-purple">Journal</span>
+          <span className="font-display text-xl md:text-2xl font-bold hidden sm:inline-block">
+            Aryan<span className="text-primary">Bansal</span>
           </span>
         </Link>
 
         <nav className="hidden md:flex items-center space-x-8">
           <NavLink to="/" label="Home" />
           <NavLink to="/projects" label="Projects" />
-          <NavLink to="/process" label="Process" />
           <NavLink to="/about" label="About" />
           <NavLink to="/contact" label="Contact" />
         </nav>
@@ -82,7 +81,7 @@ const NavLink: React.FC<{ to: string; label: string }> = ({ to, label }) => {
       className="relative text-foreground/90 hover:text-foreground transition-colors duration-200 group overflow-hidden"
     >
       <span className="block">{label}</span>
-      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-portfolio-purple scale-x-0 transition-transform duration-300 group-hover:scale-x-100 origin-left"></span>
+      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary scale-x-0 transition-transform duration-300 group-hover:scale-x-100 origin-left"></span>
     </Link>
   );
 };

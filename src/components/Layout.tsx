@@ -4,7 +4,6 @@ import Header from "./Header";
 import Footer from "./Footer";
 import MobileMenu from "./MobileMenu";
 import AvatarAssistant from "./AvatarAssistant";
-import SocialPresence from "./SocialPresence";
 import { preloadAudioEffects } from "../utils/audioUtils";
 import { motion } from "framer-motion";
 
@@ -33,7 +32,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="flex flex-col items-center">
           <motion.div
-            className="w-16 h-16 bg-portfolio-purple rounded-full flex items-center justify-center mb-4"
+            className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4"
             animate={{ 
               scale: [1, 1.1, 1],
               rotate: [0, 0, 360],
@@ -44,7 +43,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               ease: "easeInOut" 
             }}
           >
-            <span className="font-serif text-white font-bold text-3xl">D</span>
+            <span className="font-display text-white font-bold text-3xl">A</span>
           </motion.div>
           <p className="text-muted-foreground">Loading experience...</p>
         </div>
@@ -68,7 +67,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <Footer />
       
       <AvatarAssistant />
-      <SocialPresence />
     </div>
   );
 };

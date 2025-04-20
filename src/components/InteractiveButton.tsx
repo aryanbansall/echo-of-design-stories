@@ -19,12 +19,18 @@ const InteractiveButton = ({ className, children, ...props }: InteractiveButtonP
 
   return (
     <motion.div
-      whileHover={{ scale: 1.05 }}
+      whileHover={{ scale: 1.05, y: -3 }}
       whileTap={{ scale: 0.95 }}
       onHoverStart={handleHoverStart}
+      className="relative"
     >
+      <motion.span 
+        className="absolute -inset-1 rounded-lg bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 blur"
+        whileHover={{ opacity: 1 }}
+        transition={{ duration: 0.2 }}
+      />
       <Button
-        className={cn("transition-transform duration-200", className)}
+        className={cn("transition-all duration-200 relative", className)}
         onClick={handleClick}
         {...props}
       >
