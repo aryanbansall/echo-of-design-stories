@@ -1,7 +1,8 @@
 
 import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { playSoundEffect } from "@/utils/audioUtils";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -9,6 +10,8 @@ interface MobileMenuProps {
 }
 
 const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
+  const location = useLocation();
+  
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -65,10 +68,10 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
             exit="closed"
           >
             <div className="pt-20 px-6 flex flex-col space-y-6 h-full">
-              <NavLink to="/" label="Home" onClick={onClose} variants={linkVariants} />
-              <NavLink to="/projects" label="Projects" onClick={onClose} variants={linkVariants} />
-              <NavLink to="/about" label="About" onClick={onClose} variants={linkVariants} />
-              <NavLink to="/contact" label="Contact" onClick={onClose} variants={linkVariants} />
+              <NavLink to="/" label="Home" onClick={onClose} variants={linkVariants} isActive={location.pathname === "/"} />
+              <NavLink to="/projects" label="Projects" onClick={onClose} variants={linkVariants} isActive={location.pathname === "/projects" || location.pathname.startsWith("/projects/")} />
+              <NavLink to="/about" label="About" onClick={onClose} variants={linkVariants} isActive={location.pathname === "/about"} />
+              <NavLink to="/contact" label="Contact" onClick={onClose} variants={linkVariants} isActive={location.pathname === "/contact"} />
               
               <motion.div 
                 className="mt-auto mb-10 text-sm text-muted-foreground"
@@ -85,13 +88,26 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
   );
 };
 
-const NavLink: React.FC<{ to: string; label: string; onClick: () => void; variants: any }> = ({ to, label, onClick, variants }) => {
+const NavLink: React.FC<{ 
+  to: string; 
+  label: string; 
+  onClick: () => void; 
+  variants: any;
+  isActive: boolean;
+}> = ({ to, label, onClick, variants, isActive }) => {
+  const handleClick = () => {
+    playSoundEffect('click');
+    onClick();
+  };
+
   return (
     <motion.div variants={variants}>
       <Link
         to={to}
-        className="block text-2xl font-display font-medium py-2 hover:text-primary transition-colors duration-200"
-        onClick={onClick}
+        className={`block text-2xl font-display font-medium py-2 px-3 rounded-md transition-colors duration-200 ${
+          isActive ? "text-primary bg-primary/10" : "hover:text-primary hover:bg-primary/5"
+        }`}
+        onClick={handleClick}
       >
         {label}
       </Link>

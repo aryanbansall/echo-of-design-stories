@@ -61,6 +61,7 @@ const LiquidBlob: React.FC<LiquidBlobProps> = ({ className }) => {
       style={{
         left: `calc(50% - 250px)`,
         top: `calc(50% - 250px)`,
+        background: 'radial-gradient(circle, rgba(74,222,128,0.5) 0%, rgba(22,163,74,0.3) 50%, rgba(16,185,129,0.1) 100%)'
       }}
     />
   );

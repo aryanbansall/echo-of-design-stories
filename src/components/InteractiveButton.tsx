@@ -25,7 +25,7 @@ const InteractiveButton = ({ className, children, ...props }: InteractiveButtonP
       className="relative"
     >
       <motion.span 
-        className="absolute -inset-1 rounded-lg bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 blur"
+        className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-500/20 to-emerald-500/20 opacity-0 blur"
         whileHover={{ opacity: 1 }}
         transition={{ duration: 0.2 }}
       />

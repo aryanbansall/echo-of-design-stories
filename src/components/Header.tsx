@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "./ui/button";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { playSoundEffect } from "@/utils/audioUtils";
 
 interface HeaderProps {
   onMenuToggle: () => void;
@@ -12,6 +13,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ onMenuToggle, isMenuOpen }) => {
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,10 +55,10 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, isMenuOpen }) => {
         </Link>
 
         <nav className="hidden md:flex items-center space-x-8">
-          <NavLink to="/" label="Home" />
-          <NavLink to="/projects" label="Projects" />
-          <NavLink to="/about" label="About" />
-          <NavLink to="/contact" label="Contact" />
+          <NavLink to="/" label="Home" currentPath={location.pathname} />
+          <NavLink to="/projects" label="Projects" currentPath={location.pathname} />
+          <NavLink to="/about" label="About" currentPath={location.pathname} />
+          <NavLink to="/contact" label="Contact" currentPath={location.pathname} />
         </nav>
 
         <div className="flex items-center md:hidden">
@@ -74,15 +76,37 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, isMenuOpen }) => {
   );
 };
 
-const NavLink: React.FC<{ to: string; label: string }> = ({ to, label }) => {
+const NavLink: React.FC<{ to: string; label: string; currentPath: string }> = ({ to, label, currentPath }) => {
+  const isActive = currentPath === to || (to !== "/" && currentPath.startsWith(to));
+  
+  const handleHover = () => {
+    playSoundEffect('pop');
+  };
+  
   return (
-    <Link
-      to={to}
-      className="relative text-foreground/90 hover:text-foreground transition-colors duration-200 group overflow-hidden"
+    <motion.div
+      className="relative overflow-hidden"
+      onHoverStart={handleHover}
+      whileHover={{ scale: 1.05 }}
     >
-      <span className="block">{label}</span>
-      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary scale-x-0 transition-transform duration-300 group-hover:scale-x-100 origin-left"></span>
-    </Link>
+      <Link
+        to={to}
+        className={`block px-3 py-2 rounded-md transition-colors duration-200 ${
+          isActive 
+            ? "text-primary font-medium" 
+            : "text-foreground/90 hover:text-foreground"
+        }`}
+      >
+        {label}
+        <motion.div 
+          className="absolute bottom-0 left-0 w-full h-0.5 bg-primary"
+          initial={{ scaleX: isActive ? 1 : 0 }}
+          animate={{ scaleX: isActive ? 1 : 0 }}
+          whileHover={{ scaleX: 1 }}
+          transition={{ duration: 0.3 }}
+        />
+      </Link>
+    </motion.div>
   );
 };
 

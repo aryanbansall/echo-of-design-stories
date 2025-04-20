@@ -8,6 +8,7 @@ import ProjectCard from "@/components/ProjectCard";
 import { setupScrollObserver } from "@/utils/scrollUtils";
 import InteractiveButton from "@/components/InteractiveButton";
 import LiquidBlob from "@/components/LiquidBlob";
+import RepulsiveParticle from "@/components/RepulsiveParticle";
 
 // Sample projects data (in a real app, this would come from a database or API)
 const projectsData = [
@@ -98,6 +99,7 @@ const Home: React.FC = () => {
       >
         <div className="absolute inset-0 overflow-hidden">
           <LiquidBlob />
+          <RepulsiveParticle className="left-1/4 top-1/3" />
           <motion.div 
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px]"
             style={{ rotateX, rotateY }}
@@ -191,7 +193,7 @@ const Home: React.FC = () => {
             </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8">
             {projectsData.map((project) => (
               <ProjectCard key={project.id} {...project} />
             ))}
