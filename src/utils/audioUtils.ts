@@ -1,16 +1,17 @@
-
 // Cache for preloaded audio
 const audioCache: Record<string, HTMLAudioElement> = {};
 
-// Available sound effects
+// Available sound effects with base URL
+const BASE_URL = '/src/assets/sounds';
 const soundEffects = {
-  hover: '/sounds/hover.mp3',
-  click: '/sounds/click.mp3',
-  notification: '/sounds/notification.mp3',
-  open: '/sounds/open.mp3',
-  close: '/sounds/close.mp3',
-  minimize: '/sounds/minimize.mp3',
-  success: '/sounds/success.mp3',
+  hover: `${BASE_URL}/hover.mp3`,
+  click: `${BASE_URL}/click.mp3`,
+  notification: `${BASE_URL}/notification.mp3`,
+  open: `${BASE_URL}/open.mp3`,
+  close: `${BASE_URL}/close.mp3`,
+  minimize: `${BASE_URL}/minimize.mp3`,
+  success: `${BASE_URL}/success.mp3`,
+  pop: `${BASE_URL}/pop.mp3`,
 };
 
 // Preload audio files
@@ -23,28 +24,30 @@ export const preloadAudioEffects = () => {
   });
 };
 
-// Play a sound effect
-export const playSoundEffect = (effect: keyof typeof soundEffects) => {
+// Play a sound effect with error handling
+export const playSoundEffect = async (effect: keyof typeof soundEffects) => {
   // Check if user has allowed audio (stored in localStorage)
   const audioEnabled = localStorage.getItem('audioEnabled') !== 'false';
   if (!audioEnabled) return;
 
-  // Create audio on demand if not cached
-  if (!audioCache[effect] && soundEffects[effect]) {
-    const audio = new Audio(soundEffects[effect]);
-    audio.volume = 0.3;
-    audioCache[effect] = audio;
-  }
+  try {
+    // Create audio on demand if not cached
+    if (!audioCache[effect] && soundEffects[effect]) {
+      const audio = new Audio(soundEffects[effect]);
+      audio.volume = 0.3;
+      await audio.load(); // Ensure audio is loaded before playing
+      audioCache[effect] = audio;
+    }
 
-  const audio = audioCache[effect];
-  if (audio) {
-    // Create a clone to allow overlapping sounds
-    const clone = audio.cloneNode() as HTMLAudioElement;
-    clone.volume = audio.volume;
-    clone.play().catch(error => {
-      // Usually happens if play() is not triggered by user interaction
-      console.log('Audio play error:', error);
-    });
+    const audio = audioCache[effect];
+    if (audio) {
+      // Create a clone to allow overlapping sounds
+      const clone = audio.cloneNode() as HTMLAudioElement;
+      clone.volume = audio.volume;
+      await clone.play();
+    }
+  } catch (error) {
+    console.log('Audio play error:', error);
   }
 };
 

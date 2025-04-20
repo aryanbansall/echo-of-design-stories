@@ -1,13 +1,11 @@
-
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import Layout from "@/components/Layout";
 import ProjectCard from "@/components/ProjectCard";
 import { setupScrollObserver } from "@/utils/scrollUtils";
-import { playSoundEffect } from "@/utils/audioUtils";
+import InteractiveButton from "@/components/InteractiveButton";
 
 // Sample projects data (in a real app, this would come from a database or API)
 const projectsData = [
@@ -39,38 +37,56 @@ const projectsData = [
 
 const Home: React.FC = () => {
   const [isMounted, setIsMounted] = useState(false);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const rotateX = useSpring(useTransform(mouseY, [-300, 300], [5, -5]), {
+    stiffness: 100,
+    damping: 30
+  });
+  const rotateY = useSpring(useTransform(mouseX, [-300, 300], [-5, 5]), {
+    stiffness: 100,
+    damping: 30
+  });
 
   useEffect(() => {
     setIsMounted(true);
     const cleanup = setupScrollObserver();
     
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      const { innerWidth, innerHeight } = window;
+      mouseX.set(clientX - innerWidth / 2);
+      mouseY.set(clientY - innerHeight / 2);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    
     return () => {
       if (cleanup) cleanup();
+      window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, []);
-
-  const handleHeroButtonHover = () => {
-    playSoundEffect('hover');
-  };
-
-  const handleHeroButtonClick = () => {
-    playSoundEffect('click');
-  };
+  }, [mouseX, mouseY]);
 
   const handleScrollDown = () => {
     window.scrollTo({
       top: window.innerHeight - 100,
       behavior: 'smooth'
     });
-    playSoundEffect('click');
   };
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center">
+      {/* Hero Section with 3D effect */}
+      <motion.section 
+        className="relative h-screen flex items-center"
+        style={{ perspective: 1000 }}
+      >
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px]">
+          <motion.div 
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px]"
+            style={{ rotateX, rotateY }}
+          >
             <motion.div
               className="absolute inset-0 rounded-full bg-portfolio-purple/5 blur-3xl"
               animate={{
@@ -82,10 +98,13 @@ const Home: React.FC = () => {
                 repeatType: "reverse",
               }}
             />
-          </div>
+          </motion.div>
         </div>
 
-        <div className="container mx-auto px-4 relative z-10">
+        <motion.div 
+          className="container mx-auto px-4 relative z-10"
+          style={{ rotateX, rotateY }}
+        >
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isMounted ? { opacity: 1, y: 0 } : {}}
@@ -98,41 +117,39 @@ const Home: React.FC = () => {
             <p className="text-xl md:text-2xl text-muted-foreground mb-8">
               An interactive journey through my design process, showcasing the evolution of concepts into impactful solutions.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                asChild
-                size="lg"
-                className="bg-portfolio-purple hover:bg-portfolio-purple/90 text-white"
-                onMouseEnter={handleHeroButtonHover}
-                onClick={handleHeroButtonClick}
-              >
-                <Link to="/projects">
-                  View Projects
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                onMouseEnter={handleHeroButtonHover}
-                onClick={handleHeroButtonClick}
-              >
-                <Link to="/process">Explore Design Process</Link>
-              </Button>
-            </div>
-          </motion.div>
-        </div>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <InteractiveButton
+              asChild
+              size="lg"
+              className="bg-portfolio-purple hover:bg-portfolio-purple/90 text-white"
+            >
+              <Link to="/projects">
+                View Projects
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </InteractiveButton>
+            <InteractiveButton
+              asChild
+              size="lg"
+              variant="outline"
+            >
+              <Link to="/process">Explore Design Process</Link>
+            </InteractiveButton>
+          </div>
+        </motion.div>
 
         <motion.div
           className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer"
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
           onClick={handleScrollDown}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
         >
           <ChevronDown className="h-6 w-6 text-muted-foreground" />
         </motion.div>
-      </section>
+      </motion.section>
 
       {/* Featured Projects Section */}
       <section className="py-20 bg-muted/30">
@@ -165,18 +182,16 @@ const Home: React.FC = () => {
           </div>
 
           <div className="text-center mt-12">
-            <Button 
+            <InteractiveButton 
               asChild
               variant="outline"
               className="group"
-              onMouseEnter={handleHeroButtonHover}
-              onClick={handleHeroButtonClick}
             >
               <Link to="/projects">
                 View All Projects
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
-            </Button>
+            </InteractiveButton>
           </div>
         </div>
       </section>
@@ -239,18 +254,16 @@ const Home: React.FC = () => {
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.5, delay: 0.6 }}
               >
-                <Button 
+                <InteractiveButton 
                   asChild
                   variant="outline"
                   className="group"
-                  onMouseEnter={handleHeroButtonHover}
-                  onClick={handleHeroButtonClick}
                 >
                   <Link to="/process">
                     Explore Full Process
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </Link>
-                </Button>
+                </InteractiveButton>
               </motion.div>
             </div>
             
